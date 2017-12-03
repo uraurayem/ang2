@@ -11,37 +11,85 @@
     
       
     
-        var testFunc = function() {
+        var testFunc = function(params) {
 
-            this.a = 3;
-            var b = 4 ;
+
+            
+            
+            var num1 = parseInt(params["num1"]);
+            var num2 = parseInt(params["num2"]);
+
+            var opObj = params.opObj; 
+
+            console.log("num1: " + num1 + " , num2 : " + num2  + " , opObj :" + opObj)
 
             this.printSome = function(some) {
                 alert(some);
             }
-            this.add = function (num1, num2) { 
+            this.add = function () { 
+                
+                 return num1+num2;
+            }
+            this.minus = function () { 
+                
+                 return num1-num2;
+            }
+            this.multiple = function(){
+                return num1*num2; 
+            }
+            this.division = function() {
+                return num1/num2 ;
+            }
 
-                num1= parseInt(num1);
-                num2= parseInt(num2);
+            this.cal = function () { 
+                
+                if( opObj.value == ""  ) {
+                    alert("연산자를 선택해주세요") ;
+                    return 0 ; 
+                }
+                else if (opObj.value == "+") {
+                    var result = this.add() ;
+                    console.log("this.add() :"  + result) ;
+                    return result; 
 
-               // this.printSome(num1+num2);
-                return num1+num2;
+                }
+                else if (opObj.value == "") {
+                    return this.minus() ; 
+
+                }
+                else if (opObj.value == "*") {
+                    return this.multiple() ; 
+
+                }
+                else if (opObj.value == "/") {
+                    return this.division() ; 
+
+                }
+                
             }
         }
   
 
        function f1(){
 
-          var tf = new testFunc();       
+          
 
         var numObj1 = document.getElementById("num1");
         var numObj2 = document.getElementById("num2");
+        var opObj = document.getElementById("op");
+
+
+
+        var params = {};
+        params["num1"] = numObj1.value;
+        params["num2"] = numObj2.value ;
+        params["opObj"] = opObj;
 
         var resultObj = document.getElementById("result");
         
+        var tf = new testFunc(params);  
 
-
-        resultObj.value =   tf.add(  numObj1.value  ,  numObj2.value   );
+        resultObj.value =  tf.cal();
 //          tf.add(num1 , num2);
        }
         
@@ -52,7 +100,13 @@
             숫자1:
         </label>
         <input type="text" id="num1" />
-        +
+        <select id="op">
+            <option value="">선택</option>
+            <option value="+">더하기</option>
+            <option value="-">빼기</option>
+            <option value="/">나누기</option>
+            <option value="*">곱하기</option>
+        </select>
         <label for="num2">
             숫자2:
         </label>
