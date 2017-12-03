@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>
+
+            첫번째 테스트
+
+        </title>
+
+    </head>
+    <script>
+    
+      
+    
+        var testFunc = function() {
+
+            this.a = 3;
+            var b = 4 ;
+
+            this.printSome = function(some) {
+                alert(some);
+            }
+            this.add = function (num1, num2) { 
+
+                num1= parseInt(num1);
+                num2= parseInt(num2);
+
+               // this.printSome(num1+num2);
+                return num1+num2;
+            }
+        }
+  
+
+       function f1(){
+
+          var tf = new testFunc();       
+
+        var numObj1 = document.getElementById("num1");
+        var numObj2 = document.getElementById("num2");
+
+        var resultObj = document.getElementById("result");
+        
+
+
+        resultObj.value =   tf.add(  numObj1.value  ,  numObj2.value   );
+//          tf.add(num1 , num2);
+       }
+        
+    </script>
+
+    <body>
+        <label for="num1">
+            숫자1:
+        </label>
+        <input type="text" id="num1" />
+        +
+        <label for="num2">
+            숫자2:
+        </label>
+        <input type="text" id="num2" />
+
+
+        <input type="button" value="계산" onclick="f1()" />
+        
+        <input type="text" id="result" />
+    </body>
+
+</html>
